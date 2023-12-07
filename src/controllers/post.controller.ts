@@ -7,7 +7,6 @@ const createPost = async (req: Request, res: Response) => {
     try {
         const { title, content, userId } = req.body;
 
-        // Find the user by their ID
         const user = await User.findOne(userId);
 
         if (!user) {
@@ -17,13 +16,11 @@ const createPost = async (req: Request, res: Response) => {
             });
         }
 
-        // Create a new Post entity
         const newPost = new Post();
         newPost.title = title;
         newPost.content = content;
-        newPost.user = user; // Assign the user directly
+        newPost.user = user;
 
-        // Save the new Post entity
         const result = await newPost.save();
 
         return res.status(200).json({
@@ -59,7 +56,7 @@ const getAllPosts = async (req: Request, res: Response) => {
 
 const getPostById = async (req: Request, res: Response) => {
     try {
-     
+
         const postId = req.params.id;
         // const post = await Post.findOne({where: {id: new ObjectId(postId)}});
 

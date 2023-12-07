@@ -4,7 +4,7 @@ import { User } from '../entities/User.entity';
 
 const getAllUsers = async (req: Request, res: Response) => {
     try {
-     
+
         const users = await User.find();
 
         if (!users || users.length === 0) {
@@ -30,7 +30,7 @@ const getUserById = async (req: Request, res: Response) => {
     try {
         const userId = req.params.id;
         const user = await User.findOne({ where: { id: new ObjectId(userId) } });
-        console.log('user', user)
+
         if (!user) {
             return res.status(404).json({
                 success: false,
@@ -54,9 +54,9 @@ const createUser = async (req: Request, res: Response) => {
 
     try {
         const newUser = User.create(req.body);
-     
+
         const result = await newUser.save();
-     
+
         return res.status(200).json({
             success: true,
             message: 'User created successfully',
